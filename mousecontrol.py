@@ -1,7 +1,6 @@
 import speech_recognition
-import gui_automation
+import pyautogui
 
-gui = gui_automation.gui_control()
 recognizer = speech_recognition.Recognizer()
 while True:
     with speech_recognition.Microphone() as src:
@@ -11,17 +10,19 @@ while True:
             print("Please speak")
             audio = recognizer.listen(src)
             speech_to_txt = recognizer.recognize_google(audio).lower()
+            if (speech_to_txt == "quit program") or (speech_to_txt == "exit program"):
+                break
+            elif speech_to_txt == "mouse up" or speech_to_txt == "move up":
+                pyautogui.moveRel(0,-100)
+            elif speech_to_txt == "mouse down" or speech_to_txt == "move down":
+                pyautogui.moveRel(0,100)
+            elif speech_to_txt == "mouse left" or speech_to_txt == "move left":
+                pyautogui.moveRel(-100,0)
+            elif speech_to_txt == "mouse right" or speech_to_txt == "move right":
+                pyautogui.moveRel(100,0)
+            else:
+                print("Wrong Command")
         except Exception as ex:
             print("sorry. Could not understand.")
-        print(speech_to_txt)
-        if (speech_to_txt == "quit program") or (speech_to_txt == "exit program"):
-            break
-        elif speech_to_txt == "mouse up" or speech_to_txt == "move up":
-            gui.mouse_up(recognizer, src)
-        elif speech_to_txt == "mouse down" or speech_to_txt == "move down":
-            gui.mouse_down()
-        elif speech_to_txt == "mouse left" or speech_to_txt == "move left":
-            gui.mouse_left()
-        elif speech_to_txt == "mouse right" or speech_to_txt == "move right":
-            gui.mouse_right()
+        
         
