@@ -1,0 +1,108 @@
+up 
+right
+left
+down
+up 
+right
+left
+down
+up 
+right
+left
+down
+up 
+right
+left
+down
+up 
+right
+left
+down
+up 
+right
+left
+down
+move up ten
+move down twenty
+move left fifty
+move right ten
+Move up ten
+move down one
+move left five
+move right thirty
+Move up two
+move down fifteen
+move left thirty
+move right twenty
+Move up fifty
+move down one
+move left two
+move right ten
+Move up ten
+move down twenty
+move left fifty
+move right ten
+Move up ten
+move down one
+move left five
+move right thirty
+Move up two
+move down fifteen
+move left thirty
+move right twenty
+Move up fifty
+move down one
+move left two
+move right ten
+Move up ten
+move down twenty
+move left fifty
+move right ten
+Move up ten
+move down one
+move left five
+move right thirty
+Move up two
+move down fifteen
+move left thirty
+move right twenty
+Move up fifty
+move down one
+move left two
+move right ten
+Move up ten
+move down twenty
+move left fifty
+move right ten
+Move up ten
+move down one
+move left five
+move right thirty
+Move up two
+move down fifteen
+move left thirty
+move right twenty
+Move up fifty
+move down one
+move left two
+move right ten
+Select
+One
+Two
+Three
+Four 
+Five 
+Six
+Seven
+Eight
+Nine
+Click
+Ten
+Fifteen
+Twenty
+Twenty five
+Thirty
+Thirty five
+Forty
+Forty five
+Fifty
