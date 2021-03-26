@@ -1,5 +1,25 @@
-up 
-right
+up ten
+up twenty
+up thirty
+up forty
+Up fifty
+Down ten
+Down twenty
+Down thirty
+Down forty
+Down fifty
+right ten
+Right twenty
+Right thirty
+Right forty
+Right fifty
+Left ten
+left twenty
+left thirty
+Left forty
+Left fifty
+Up
+right 
 left
 down
 up 
@@ -22,6 +42,91 @@ up
 right
 left
 down
+Finish
+End
+End
+End
+End
+End
+End
+End
+End
+Click
+Click
+Click
+Click
+Click
+Click
+Click
+Click
+Click
+Click
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select spot
+Select
+Select
+Select
+Select
+Select
+Select
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+Quit program
+
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Program
+Click
 move up ten
 move down twenty
 move left fifty
