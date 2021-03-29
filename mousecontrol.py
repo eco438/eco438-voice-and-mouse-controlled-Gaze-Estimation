@@ -8,37 +8,32 @@ from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson import ApiException
 from ibm_watson.websocket import RecognizeCallback, AudioSource
 import json
-recognizer = speech_recognition.Recognizer()
+import cv2
+import csv   
 
-authenticator = IAMAuthenticator('')
-speech_to_text = SpeechToTextV1(
-    authenticator=authenticator
-)
+def main():
+    count = 0
+    recognizer = speech_recognition.Recognizer()
+    authenticator = IAMAuthenticator('B88jZ6CWcaCfY-gES0dPk6xxQA2E1Ufg46BwOc5GpKYE')
+    speech_to_text = SpeechToTextV1(
+        authenticator=authenticator
+    )
 
-speech_to_text.set_service_url('https://api.us-east.speech-to-text.watson.cloud.ibm.com/instances/097def43-7968-4858-82d9-6a817455f100')
-break_program = False
-def on_press(key):
-    global break_program
-    if key == keyboard.Key.enter:
-        print ('end pressed')
-        break_program = True
-        return False
-    elif key == keyboard.Key.space:
-        pyautogui.click()
-        return False
+    speech_to_text.set_service_url('https://api.us-east.speech-to-text.watson.cloud.ibm.com/instances/097def43-7968-4858-82d9-6a817455f100')
 
-with keyboard.Listener(on_press=on_press) as listener:
-    while break_program==False:
+
+    while True:
         speech = None
         words  = None
-        with speech_recognition.Microphone() as src:
+        with speech_recognition.Microphone(device_index=2) as src:
             recognizer.adjust_for_ambient_noise(src)
             print("Threshold Value After calibration:" + str(recognizer.energy_threshold))
             print("Please speak")
             audio = recognizer.listen(src,phrase_time_limit=1.5)
 
         try:
-            speech = speech_to_text.recognize(audio=audio.get_wav_data(),content_type='audio/wav',keywords=['move up','move down','move left','move right','move up ten','move down ten','move left ten','move right ten','move up twenty','move down twenty','move left twenty','move right twenty','move up thirty','move down thirty','move left thirty','move right thirty','move up forty','move down forty','move left forty','move right forty','move up fifty','move down fifty','move left fifty','move right fifty','quit','end','finish','click'],keywords_threshold=0.8,inactivity_timeout = 3,smartFormatting=True,endOfPhraseSilenceTime=0.5,customization_weight = 1,language_customization_id= "c7fee10d-7c09-4af8-b05f-bb0cd8ae0984",base_model_name= "en-US_BroadbandModel").get_result()
+            speech = speech_to_text.recognize(audio=audio.get_wav_data(),content_type='audio/wav',keywords=['move up','move down','move left','move right','move up ten','move down ten','move left ten','move right ten','move up twenty','move down twenty','move left twenty','move right twenty','move up thirty','move down thirty','move left thirty','move right thirty','move up forty','move down forty','move left forty','move right forty','move up fifty','move down fifty','move left fifty','move right fifty','quit program','end','finish','click','stop'],keywords_threshold=0.6,inactivity_timeout = 3,smartFormatting=True,endOfPhraseSilenceTime=0.5,customization_weight = 0.8,language_customization_id= "c7fee10d-7c09-4af8-b05f-bb0cd8ae0984",base_model_name= "en-US_BroadbandModel").get_result()
+            print(speech)
             try:
                 move = speech["results"][0]["keywords_result"]
                 for key in move:
@@ -50,32 +45,56 @@ with keyboard.Listener(on_press=on_press) as listener:
         except ApiException as ex:
             print ("Method failed with status code " + str(ex.code) + ": " + ex.message)
         try:
-                if len(words) <3:
-                    if (speech == "quit") or (speech == "exit"):
-                        break
-                    elif "up" in speech:
-                        pyautogui.moveRel(0,-100)
-                    elif "down" in speech:
-                        pyautogui.moveRel(0,100)
-                    elif "left" in speech:
-                        pyautogui.moveRel(-100,0)
-                    elif "right" in speech:
-                        pyautogui.moveRel(100,0)
-                else:
-                    if "quit" in speech:
-                        break
-                    elif "up" in speech:
-                        pyautogui.moveRel(0,-10*int(w2n.word_to_num(words[2])))
-                    elif "down" in speech:
-                        pyautogui.moveRel(0,10*int(w2n.word_to_num(words[2])))
-                    elif "left" in speech:
-                        pyautogui.moveRel(-10*int(w2n.word_to_num(words[2])),0)
-                    elif "right" in speech:
-                        pyautogui.moveRel(10*int(w2n.word_to_num(words[2])),0) 
+            if len(words) <3:
+                count+=1
+                if "stop" in speech:
+                    count-=1
+                    break
+                elif "up" in speech:
+                    pyautogui.moveRel(0,-100)
+                elif "down" in speech:
+                    pyautogui.moveRel(0,100)
+                elif "left" in speech:
+                    pyautogui.moveRel(-100,0)
+                elif "right" in speech:
+                    pyautogui.moveRel(100,0)
+                elif "click" in speech:
+                    count-=1
+                    pyautogui.doubleClick()
+            else:
+                count+=1
+                if "stop" in speech:
+                    count-=1
+                    break
+                elif "up" in speech:
+                    pyautogui.moveRel(0,-10*int(w2n.word_to_num(words[2])))
+                elif "down" in speech:
+                    pyautogui.moveRel(0,10*int(w2n.word_to_num(words[2])))
+                elif "left" in speech:
+                    pyautogui.moveRel(-10*int(w2n.word_to_num(words[2])),0)
+                elif "right" in speech:
+                    pyautogui.moveRel(10*int(w2n.word_to_num(words[2])),0) 
+                elif "click" in speech:
+                    count-=1
+                    pyautogui.doubleClick()
+
         except Exception as ex:
             print("sorry. Could not understand.")
-        time.sleep(5)
-        listener.join()
+        k = cv2.waitKey(1) & 0xFF
+        # press 'q' to exit
+        if k == ord('q'):
+            break
+    return count
+if __name__ == "__main__":
+    name = input("Enter your name: ")
+    count = main()
+    fields=[name,count]
+    with open(r'Data_collections.csv', 'a') as f:
+        writer = csv.writer(f)
+        writer.writerow(fields)
+    
+    
+    
 
 
         
