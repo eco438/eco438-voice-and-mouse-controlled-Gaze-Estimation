@@ -14,7 +14,7 @@ import csv
 def main():
     count = 0
     recognizer = speech_recognition.Recognizer()
-    authenticator = IAMAuthenticator('B88jZ6CWcaCfY-gES0dPk6xxQA2E1Ufg46BwOc5GpKYE')
+    authenticator = IAMAuthenticator('')
     speech_to_text = SpeechToTextV1(
         authenticator=authenticator
     )
