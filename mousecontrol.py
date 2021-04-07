@@ -1,4 +1,3 @@
-from pynput import keyboard
 import speech_recognition
 import pyautogui
 from word2number import w2n
@@ -10,19 +9,26 @@ from ibm_watson.websocket import RecognizeCallback, AudioSource
 import json
 import cv2
 import csv   
+import threading as th
+import keyboard
 
+
+keep_going = True
+def key_capture_thread():
+    global keep_going
+    a = keyboard.read_key()
+    if a== "space":
+        keep_going = False
 def main():
+    th.Thread(target=key_capture_thread, args=(), name='key_capture_thread', daemon=True).start()
     count = 0
     recognizer = speech_recognition.Recognizer()
     authenticator = IAMAuthenticator('')
     speech_to_text = SpeechToTextV1(
         authenticator=authenticator
     )
-
     speech_to_text.set_service_url('https://api.us-east.speech-to-text.watson.cloud.ibm.com/instances/097def43-7968-4858-82d9-6a817455f100')
-
-
-    while True:
+    while keep_going:
         speech = None
         words  = None
         with speech_recognition.Microphone(device_index=2) as src:
@@ -80,18 +86,16 @@ def main():
 
         except Exception as ex:
             print("sorry. Could not understand.")
-        k = cv2.waitKey(1) & 0xFF
-        # press 'q' to exit
-        if k == ord('q'):
-            break
     return count
 if __name__ == "__main__":
-    name = input("Enter your name: ")
+    #name = input("Enter your name: ")
     count = main()
+    """
     fields=[name,count]
     with open(r'Data_collections.csv', 'a') as f:
         writer = csv.writer(f)
         writer.writerow(fields)
+    """
     
     
     
