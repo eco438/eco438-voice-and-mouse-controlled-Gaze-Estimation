@@ -1,0 +1,16 @@
+﻿First run:
+python -m pip install -r requirement.txt
+
+Incase the dependencies don't install:
+python -m pip install screeninfo
+python -m pip install ibm-watson
+python -m pip install python-opencv
+python -m pip install pyautogui
+python -m pip install keyboard
+python -m pip install SpeechRecognition
+python -m pip install ibm-watson
+Python -m pip install word2number
+
+Incase you can't install pyaudio, follow the command below:
+pip install pipwin
+pipwin install pyaudio
