@@ -269,7 +269,7 @@ if __name__ == "__main__":
         steps.append((mouse_x, mouse_y))
         steps.append((x-mouse_x, y-mouse_y))
         turtle.goto(mouse_x, mouse_y)
-        #count = main(mouse_x, mouse_y, points)
+        count = speech_command(mouse_x, mouse_y, points)
 
         steps.append(count)
         lst.append(steps)
